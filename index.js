@@ -26,4 +26,13 @@ app.get('/create', (req, res) => {
 
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
+
+	socket.on('joinLobby', (lobbyId) => {
+		socket.join(lobbyId);
+		console.log(`User ${socket.id} joined lobby ${lobbyId}`);
+	});
+
+	socket.on('disconnect', () => {
+		console.log('user disconnected:', socket.id);
+	});
 });
